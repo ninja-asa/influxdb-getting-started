@@ -15,7 +15,3 @@
         DOCKER_INFLUXDB_INIT_PASSWORD: ${PASSWORD}
         DOCKER_INFLUXDB_INIT_ORG: ${ORGNAME}
         DOCKER_INFLUXDB_INIT_BUCKET: ${BUCKETNAME}
-
-  volumes:
-    influxdb2-data:
-    influxdb2-config:
