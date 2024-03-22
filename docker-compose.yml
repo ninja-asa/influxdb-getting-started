@@ -9,9 +9,16 @@
       volumes:
         - ./influxdb2-data:/var/lib/influxdb2
         - ./influxdb2-config:/etc/influxdb2
-      environment:
-        DOCKER_INFLUXDB_INIT_MODE: setup
-        DOCKER_INFLUXDB_INIT_USERNAME: ${MYUSERNAME}
-        DOCKER_INFLUXDB_INIT_PASSWORD: ${MYPASSWORD}
-        DOCKER_INFLUXDB_INIT_ORG: ${MYORGNAME}
-        DOCKER_INFLUXDB_INIT_BUCKET: ${MYBUCKETNAME}
+      env_file:   
+        - influxv2.env
+
+    telegraf:
+      container_name: telegraf
+      image: telegraf:alpine
+      depends_on:
+        - influxdb2
+      volumes:
+        # Mount for telegraf config
+        - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      env_file:
+        - influxv2.env
