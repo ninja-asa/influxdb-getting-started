@@ -1,37 +1,72 @@
-# influxdb-getting-started
+# InfluxDB Getting Started
 
-# Start Influx DB using docker
-1. Setup configuration is defined via environment variables in `.env`.
-```bash
-USERNAME=...
-PASSWORD=...
-ORGNAME=...
-BUCKETNAME=...
-```
-2. Set password must fulfill the National Institute of Standards and Technology (NIST) standards for 2021. [InfluxDB Requirements]([dsad](https://docs.influxdata.com/influxdb/cloud/account-management/change-password/#password-requirements)). Otherwise, the service will fail to run.
-2. When using docker we will be ensuring that data is persisted so data is not deleted.
+This repository contains a Docker Compose setup to quickly get started with InfluxDB 2 and Telegraf for monitoring internet speed and memory usage.
 
-## Use Docker Command
-In the terminal, run:
-```bash
-docker run \
- --name influxdb2 \
- --publish 8086:8086 \
- --mount type=volume,source=influxdb2-data,target=/var/lib/influxdb2 \
- --mount type=volume,source=influxdb2-config,target=/etc/influxdb2 \
- --env DOCKER_INFLUXDB_INIT_MODE=setup \
- --env DOCKER_INFLUXDB_INIT_USERNAME=${USERNAME} \
- --env DOCKER_INFLUXDB_INIT_PASSWORD=${PASSWORD} \
- --env DOCKER_INFLUXDB_INIT_ORG=${ORGNAME} \
- --env DOCKER_INFLUXDB_INIT_BUCKET=${BUCKETNAME} \
- influxdb:2
- ```
+## Prerequisites
 
-## Use Docker Compose
+Make sure you have Docker and Docker Compose installed on your system.
 
-Simply run `docker compose up -d`, and the container should stay up.
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
-If the docker container successfuly starts, then you should be able to access `localhost:8086` to access Influx UI.
+## Setup
 
-# User Management
-1. Has to be performed via Influx CLI, not possible via UI
+1. Clone this repository:
+
+    ```bash
+    git clone https://github.com/your-username/influxdb-getting-started.git
+    cd influxdb-getting-started
+    ```
+
+2. Create an `.env` file based on the provided `example.env`:
+
+    ```bash
+    cp example.env influxv2.env
+    ```
+
+3. Modify the `influxv2.env` file to set your desired configuration.
+
+4. Start the services using Docker Compose:
+
+    ```bash
+    docker-compose up -d
+    ```
+
+## Configuration
+
+- `influxdb2`: This service sets up InfluxDB 2 with persistent data storage and configuration.
+- `telegraf`: Telegraf is configured to collect internet speed and memory usage metrics and send them to InfluxDB.
+
+## Usage
+
+- Access InfluxDB 2 UI by visiting `http://localhost:8086` in your web browser.
+- Access Telegraf configurations in `./telegraf/telegraf.conf` for any customizations.
+- View collected metrics in InfluxDB using queries or explore them in the UI.
+- Modify the `telegraf.conf` file as per your requirements for additional data collection.
+
+## Contributing
+
+Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the [GNU General Public License Version 2](LICENSE).
+
+## Motivation
+
+The goal of this repository is for me to get familiar with the Influx Data Platform, given its optimization towards time series data. I was facing with two needs:
+- wished to monitor the quality of my internet speed at home
+- wished to monitor uptime of web applications and trigger alerts under certain conditions.
+
+Therefore, throughout this process, I had the following goals:
+- I will be setting up from scratch an instance of influx DB
+- I will be understanding general good practices when structuring data into Influx DB
+- I will be experimenting different data ingest methods into influx DB
+- I will be building dashboards
+- I will be doing this, so the setup is easily reproducible in any other host device
+- I will be looking into how to back-up and restore the data and other configurations done (particularly dashboards)
+
+## Challenges and Resolutions
+1. **Not using the credentials I was using for my admin user**: to investigate this, I used Docker Desktop to inspect the container and checking the value of the environment variables I was setting in Docker Compose. Realised that my `${USERNAME}` was actually pointing to my Windows User Name, rather than my `.env` `USERNAME`. Decided to simply change the environment variable to be unique `MYUSERNAME`.
+2. **Cannot create new bucket because organization cannot be found**: tried to create via InfluxDB UI a new bucket to add the Demo data, which was failing. Used Influx CLI `influx bucket create -n Demo -o <MYORGNAME> -r 0 -t <token>` and it just worked. Afterwards, attempted again through InfluxDB UI to create a bucket and it worked.
+3. **InfluxDB cannot start**: the container would stop immediately. Needed a second pair of eyes, but I could find in logs that the password did not fulfill requirements - to test, was just using a 2 character password.
