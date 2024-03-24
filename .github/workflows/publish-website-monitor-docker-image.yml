@@ -4,8 +4,25 @@ on:
     branches: [ "main" ]
 
 jobs:
+  build-and-validate:
+    name: Build and Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Build Docker Image
+        run: docker build -t my-image:latest .
+
+      - name: Validate
+        run: |
+          wget https://github.com/opencontainers/image-tools/releases/download/v1.0.0/oci-image-tool && \
+          chmod +x oci-image-tool && \
+          ./oci-image-tool validate --tarball my-image.tar.gz
+
   push_to_registry:
     name: Push Docker Image to Docker Hub
+    needs: build-and-validate
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo
