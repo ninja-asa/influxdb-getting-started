@@ -24,7 +24,7 @@ jobs:
         with:
           images: ninjaasa/influxdb-getting-started-website-monitor
           tags: |
-            type=raw,value=${{ steps.date.outputs.date }}
+            type=raw,value=${{github.run_id}}
             type=raw,value=latest
           labels: |
             org.label-schema.build-date=${{ steps.date.outputs.date}}
