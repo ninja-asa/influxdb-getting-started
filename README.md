@@ -1,5 +1,3 @@
-[[TOC]]
-
 # InfluxDB Getting Started
 
 This repository contains a Docker Compose setup to quickly get started with InfluxDB 2 and Telegraf for monitoring internet speed and memory usage.
