@@ -13,9 +13,9 @@ setup(
     author='ninja-asa',
     packages=find_packages(),
     install_requires=requirements,
-    # entry_points={
-    #     'console_scripts': [
-    #         'webmonitor=webmonitor.webmonitor:main',
-    #     ],
-    # },
+    entry_points={
+        'console_scripts': [
+            'webmonitor=webmonitor.app:main',
+        ],
+    },
 )

@@ -15,6 +15,20 @@ This Python script monitors the availability of one or more websites by periodic
 - Docker installed on your system.
 
 ## Getting Started
+### Start a Docker Container
+1. Clone this repository.
+2. Open the project in Visual Studio Code.
+3. Build Docker Image using the provided `Dockerfile`:
+    ```bash
+    docker build -t website-availability-monitor .
+    ```
+4. Copy the `example.env` file to a `.env` the relevant environment variables - your InfluxDB connection parameters and the websites you want to monitor.
+5. Run the Docker container:
+    ```bash
+    docker run --env-file .env website-availability-monitor
+    ```
+
+### Develop within IDE using Devcontainer
 1. Clone this repository
 2. Open the project in Visual Studio Code.
 
@@ -27,16 +41,7 @@ This Python script monitors the availability of one or more websites by periodic
     ```
 
 5. Copy the `example.env` file to a `.env` the relevant environment variables - your InfluxDB connection parameters and the websites you want to monitor.
-6. Load variables in bash `. .env`
-7. Install webmonitor as a package:
-    ```bash
-    pip install -e .
-    ```
-8. Run the script:
-    ```bash
-    python webmonitor/app.py
-    ```
-
+6. Launch the debugger by selecting the adequate configuration. It will load the environment variables from the `.env` file and start the script.
 
 ## Configuration
 
