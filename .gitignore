@@ -161,6 +161,6 @@ cython_debug/
 
 # Custom for this project
 influxv2.env
-
+monitor.env
 influxdb2-config/* 
 influxdb2-data/* 
