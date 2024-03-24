@@ -24,9 +24,9 @@ LABEL org.label-schema.description="Container which launches a recurrent web mon
 
 LABEL org.opencontainers.image.licenses="GNU General Public License Version 2"
 
-LABEL org.label-schema.schema-version = "1.0"
+LABEL org.label-schema.schema-version="1.0"
 
-LABEL org.label-schema.docker.cmd= "docker run -d -e INFLUX_URL=<Url> -e INFLUX_TOKEN=<YourToken> -e INFLUX_BUCKET=<YourBucket> -e INFLUX_ORG=<Your Org> -e CHECK_INTERVAL=60 -e WEBSITES=<Your websites> -e CONTROL_WEBSITE=https://www.google.com -e RETRIES=3 ninjaasa/influxdb-getting-started-website-monitor"
+LABEL org.label-schema.docker.cmd="docker run -d -e INFLUX_URL=<Url> -e INFLUX_TOKEN=<YourToken> -e INFLUX_BUCKET=<YourBucket> -e INFLUX_ORG=<Your Org> -e CHECK_INTERVAL=60 -e WEBSITES=<Your websites> -e CONTROL_WEBSITE=https://www.google.com -e RETRIES=3 ninjaasa/influxdb-getting-started-website-monitor"
 
 LABEL org.opencontainers.image.authors="Sofia Assis"
 
