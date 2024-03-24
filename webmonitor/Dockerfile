@@ -15,5 +15,9 @@ COPY . /workspace
 WORKDIR /workspace
 RUN pip install .
 
+# Set labels
+LABEL org.opencontainers.image.source=https://github.com/ninja-asa/influxdb-getting-started/
+LABEL org.opencontainers.image.description="Container which launches a recurrent web monitoring service and writes the results to an InfluxDB database."
+LABEL org.opencontainers.image.licenses="GNU General Public License Version 2"
 # Start the application
 CMD ["python", "webmonitor/app.py"]
