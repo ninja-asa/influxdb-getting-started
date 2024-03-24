@@ -22,3 +22,13 @@
         - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
       env_file:
         - influxv2.env
+    
+    website-monitor:
+      container_name: website-monitor
+      build:
+        context: ./monitor-web-server
+        dockerfile: Dockerfile
+      depends_on:
+        - influxdb2
+      env_file:
+        - monitor.env
