@@ -4,24 +4,15 @@ on:
     branches: [ "main" ]
 
 jobs:
-  update-semver:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: haya14busa/action-update-semver@v1
-        id: version
-        with:
-          major_version_tag_only: false  # (optional, default is "false")
   push_to_registry:
     name: Push Docker Image to Docker Hub
-    needs: [update-semver]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v4
-      - name: Get Version
-        id: version
-        run: echo ::set-output name=version::${{ steps.update-semver.outputs.new_version }}
+      - name: Build version
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y%m%d%H%M%S')"
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -33,7 +24,6 @@ jobs:
         with:
           images: ninjaasa/influxdb-getting-started-website-monitor
           tags: |
-            type=raw,value=${{ github.run_id }}
             type=raw,value=${{ steps.date.outputs.date }}
             type=raw,value=latest
       - name: Build and push Docker image
