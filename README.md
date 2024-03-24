@@ -12,13 +12,7 @@ Make sure you have Docker and Docker Compose installed on your system.
 
 ## Setup
 
-1. Clone this repository:
-
-    ```bash
-    git clone https://github.com/your-username/influxdb-getting-started.git
-    cd influxdb-getting-started
-    ```
-
+1. Clone this repository.
 2. Create an `.env` file based on the provided `example.env`:
 
     ```bash
