@@ -43,6 +43,24 @@ This Python script monitors the availability of one or more websites by periodic
 All the required configuration is done through the definition of environment variables, which can be consulted in `example.env`.
 
 
+## Data Schema for InfluxDB
+
+The data written into InfluxDB is structured as follows:
+
+### Measurement
+The measurement name is website_status.
+
+### Tags
+- website: The name of the website being monitored.
+### Fields
+- success: A boolean value (represented as an integer, 0 for False and 1 for True) indicating whether the website is up (1) or down (0).
+- response_code: The HTTP response code received when trying to access the website.
+- response_time: The time taken to receive the HTTP response from the website.
+- connection_time: The time taken to establish a connection to the website.
+# Time
+- The timestamp (time) for each data point is the current time when the data is written to InfluxDB. The precision is set to seconds.
+
+
 ## Contributing
 
 Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
