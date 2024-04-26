@@ -1,5 +1,8 @@
 # InfluxDB Getting Started
 [![Website Monitor - Publish Docker Image](https://github.com/ninja-asa/influxdb-getting-started/actions/workflows/publish-website-monitor-docker-image.yml/badge.svg)](https://github.com/ninja-asa/influxdb-getting-started/actions/workflows/publish-website-monitor-docker-image.yml)
+[![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0)
+
+
 
 This repository contains a Docker Compose setup to quickly get started with InfluxDB 2 and Telegraf for monitoring internet speed and memory usage.
 
