@@ -43,7 +43,7 @@ Make sure you have Docker and Docker Compose installed on your system.
 
 ## Contributing
 
-Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+This is simply a playground for me to experiment so I don't really expect any external contributions. Nevertheless, if you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
 
 ## License
 
