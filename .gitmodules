@@ -1,0 +1,3 @@
+[submodule "examples/website-monitor-with-influxdb"]
+	path = examples/website-monitor-with-influxdb
+	url = https://github.com/ninja-asa/website-monitor-with-influxdb
